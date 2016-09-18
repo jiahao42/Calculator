@@ -13,6 +13,7 @@ public class InitState implements State {
      */
     @Override
     public void findDot() {
+        calculator.setState(calculator.getOperandOneWithDot());
     }
 
     /**
@@ -20,7 +21,7 @@ public class InitState implements State {
      */
     @Override
     public void findDigit() {
-
+        calculator.setState(calculator.getOperandOneWithoutDot());
     }
 
     /**

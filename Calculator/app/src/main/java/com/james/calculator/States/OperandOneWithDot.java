@@ -15,7 +15,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void findDot() {
-
+        calculator.setState(calculator.getErrorState());
     }
 
     /**

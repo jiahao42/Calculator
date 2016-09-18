@@ -37,7 +37,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onCEPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -45,7 +45,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onCPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
