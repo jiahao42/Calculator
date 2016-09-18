@@ -3,7 +3,7 @@ package com.james.calculator.States;
 import com.james.calculator.Calculator;
 
 public class OperandTwoWithDot implements State {
-
+    // TODO: 2016/9/18 to be continued... 
     Calculator calculator;
     public OperandTwoWithDot(Calculator calculator) {
         this.calculator = calculator;

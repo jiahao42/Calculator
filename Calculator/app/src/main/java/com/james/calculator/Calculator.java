@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.james.calculator.States.DoneState;
 import com.james.calculator.States.ErrorState;
 import com.james.calculator.States.InitState;
 import com.james.calculator.States.OperandOneWithDot;
@@ -31,6 +32,7 @@ public class Calculator extends Activity {
     State operatorState;
     State replaceableOperatorState;
     State singleOperand;
+    State doneState;
 
     State state = initState;
     float operandOne = 0f;
@@ -101,6 +103,7 @@ public class Calculator extends Activity {
         this.operatorState = new OperatorState(this);
         this.replaceableOperatorState = new ReplaceableOperatorState(this);
         this.singleOperand = new SingleOperand(this);
+        this.doneState = new DoneState(this);
     }
 
     public void findDot() {
@@ -169,5 +172,9 @@ public class Calculator extends Activity {
 
     public State getState() {
         return state;
+    }
+
+    public State getDoneState(){
+        return doneState;
     }
 }

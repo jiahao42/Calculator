@@ -2,20 +2,18 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
-public class OperandOneWithDot implements State {
-
+public class DoneState implements State {
     Calculator calculator;
-    public OperandOneWithDot(Calculator calculator) {
+    public DoneState(Calculator calculator) {
         this.calculator = calculator;
     }
-
 
     /**
      * 当找到小数点时应当作出的应对
      */
     @Override
     public void findDot() {
-        calculator.setState(calculator.getErrorState());
+
     }
 
     /**
@@ -23,7 +21,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void findDigit() {
-        calculator.setState(calculator.getOperandOneWithDot());
+
     }
 
     /**
@@ -31,7 +29,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void findOperator() {
-        calculator.setState(calculator.getOperatorState());
+
     }
 
     /**
@@ -39,7 +37,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getInitState());
+
     }
 
     /**
@@ -47,7 +45,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void onCPressed() {
-        calculator.setState(calculator.getInitState());
+
     }
 
     /**
@@ -55,6 +53,6 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getInitState());
+
     }
 }
