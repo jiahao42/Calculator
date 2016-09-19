@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态0
+ */
 public class InitState implements State {
     Calculator calculator;
     public InitState(Calculator calculator) {
@@ -29,7 +32,7 @@ public class InitState implements State {
      */
     @Override
     public void findOperator() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -37,7 +40,7 @@ public class InitState implements State {
      */
     @Override
     public void onCEPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -45,7 +48,7 @@ public class InitState implements State {
      */
     @Override
     public void onCPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -53,6 +56,6 @@ public class InitState implements State {
      */
     @Override
     public void onEqualPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 }

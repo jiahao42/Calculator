@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态7
+ */
 public class SingleOperandDoneState implements State {
 
     Calculator calculator;

@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态5
+ */
 public class ReplaceableOperatorState implements State {
 
 

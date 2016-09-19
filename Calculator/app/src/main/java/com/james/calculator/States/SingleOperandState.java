@@ -1,6 +1,17 @@
 package com.james.calculator.States;
 
+import com.james.calculator.Calculator;
+
+/**
+ * 对应图中状态12
+ */
 public class SingleOperandState implements State {
+    Calculator calculator;
+
+    public SingleOperandState(Calculator calculator) {
+        this.calculator = calculator;
+    }
+
     /**
      * 当找到小数点时应当作出的应对
      */

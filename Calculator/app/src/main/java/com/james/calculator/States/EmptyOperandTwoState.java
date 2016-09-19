@@ -1,6 +1,16 @@
 package com.james.calculator.States;
 
+import com.james.calculator.Calculator;
+
+/**
+ * 对应图中状态6
+ */
 public class EmptyOperandTwoState implements State {
+    Calculator calculator;
+    public EmptyOperandTwoState(Calculator calculator) {
+        this.calculator = calculator;
+    }
+
     /**
      * 当找到小数点时应当作出的应对
      */

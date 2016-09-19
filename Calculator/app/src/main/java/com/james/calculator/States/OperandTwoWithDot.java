@@ -2,9 +2,12 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态9
+ */
 public class OperandTwoWithDot implements State {
-    // TODO: 2016/9/18 to be continued...
     Calculator calculator;
+
     public OperandTwoWithDot(Calculator calculator) {
         this.calculator = calculator;
     }
@@ -23,6 +26,7 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void findDigit() {
+        calculator.setOperandTwo();
         calculator.setState(calculator.getOperandTwoWithDot());
     }
 
@@ -31,7 +35,7 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void findOperator() {
-        calculator.setState(calculator.getDoneState());
+        calculator.setState(calculator.getDoubleOperandDoneState());
     }
 
     /**
@@ -39,7 +43,7 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getReplaceableOperatorState());
+        calculator.setState(calculator.getEmptyOperandTwoState());
     }
 
     /**
@@ -55,6 +59,6 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getDoneState());
+        calculator.setState(calculator.getSingleOperandDoneState());
     }
 }

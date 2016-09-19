@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态1
+ */
 public class OperandOneWithoutDot implements State {
 
     Calculator calculator;
@@ -15,6 +18,7 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void findDot() {
+        calculator.getOperandOne();
         calculator.setState(calculator.getOperandOneWithDot());
     }
 
@@ -23,6 +27,7 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void findDigit() {
+        calculator.getOperandOne();
         calculator.setState(calculator.getOperandOneWithoutDot());
     }
 

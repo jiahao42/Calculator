@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态2
+ */
 public class OperandOneWithDot implements State {
 
     Calculator calculator;
@@ -23,6 +26,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void findDigit() {
+        calculator.setOperandOne();
         calculator.setState(calculator.getOperandOneWithDot());
     }
 
@@ -52,9 +56,10 @@ public class OperandOneWithDot implements State {
 
     /**
      * 当按下等号时作出的应对
+     * 应该维持在此状态
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.setState(calculator.getOperandOneWithDot());
     }
 }

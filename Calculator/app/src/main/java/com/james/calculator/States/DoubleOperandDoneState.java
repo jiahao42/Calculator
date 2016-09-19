@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态11
+ */
 public class DoubleOperandDoneState implements State {
     Calculator calculator;
     public DoubleOperandDoneState(Calculator calculator) {

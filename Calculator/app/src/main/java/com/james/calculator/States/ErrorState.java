@@ -2,6 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
+/**
+ * 对应图中状态3与10
+ */
 public class ErrorState implements State {
     Calculator calculator;
     public ErrorState(Calculator calculator) {
@@ -57,6 +60,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onEqualPressed() {
-
+        calculator.showError();
+        calculator.setState(calculator.getErrorState());
     }
 }

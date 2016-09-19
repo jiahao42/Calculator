@@ -2,12 +2,14 @@ package com.james.calculator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.james.calculator.States.DoubleOperandDoneState;
+import com.james.calculator.States.EmptyOperandTwoState;
 import com.james.calculator.States.ErrorState;
 import com.james.calculator.States.InitState;
 import com.james.calculator.States.OperandOneWithDot;
@@ -17,27 +19,31 @@ import com.james.calculator.States.OperandTwoWithoutDot;
 import com.james.calculator.States.OperatorState;
 import com.james.calculator.States.ReplaceableOperatorState;
 import com.james.calculator.States.SingleOperandDoneState;
+import com.james.calculator.States.SingleOperandState;
 import com.james.calculator.States.State;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class Calculator extends Activity {
-    State errorState;
-    State initState;
-    State operandOneWithDot;
-    State operandOneWithoutDot;
-    State operandTwoWithDot;
-    State operandTwoWithoutDot;
-    State operatorState;
-    State replaceableOperatorState;
-    State singleOperand;
-    State doneState;
+public class Calculator extends Activity implements View.OnClickListener{
+    private State errorState;
+    private State initState;
+    private State operandOneWithDot;
+    private State operandOneWithoutDot;
+    private State operandTwoWithDot;
+    private State operandTwoWithoutDot;
+    private State operatorState;
+    private State replaceableOperatorState;
+    private State doubleOperandDoneState;
+    private State emptyOperandTwoState;
+    private State singleOperandDoneState;
+    private State singleOperandSate;
 
-    State state = initState;
-    float operandOne = 0f;
-    float operandTwo = 0f;
-    float resultValue = 0f;
+    private State state = initState;
+    private float operandOne = 0f;
+    private float operandTwo = 0f;
+    private float resultValue = 0f;
+    private char operator;
 
     @Bind(R.id.result)
     TextView result;
@@ -102,8 +108,10 @@ public class Calculator extends Activity {
         this.operandTwoWithoutDot = new OperandTwoWithoutDot(this);
         this.operatorState = new OperatorState(this);
         this.replaceableOperatorState = new ReplaceableOperatorState(this);
-        this.singleOperand = new SingleOperandDoneState(this);
-        this.doneState = new DoubleOperandDoneState(this);
+        this.doubleOperandDoneState = new DoubleOperandDoneState(this);
+        this.emptyOperandTwoState = new EmptyOperandTwoState(this);
+        this.singleOperandDoneState = new SingleOperandDoneState(this);
+        this.singleOperandSate = new SingleOperandState(this);
     }
 
     public void findDot() {
@@ -166,17 +174,26 @@ public class Calculator extends Activity {
         return replaceableOperatorState;
     }
 
-    public State getSingleOperand() {
-        return singleOperand;
+    public State getDoubleOperandDoneState() {
+        return doubleOperandDoneState;
+    }
+
+    public State getEmptyOperandTwoState() {
+        return emptyOperandTwoState;
+    }
+
+    public State getSingleOperandDoneState() {
+        return singleOperandDoneState;
+    }
+
+    public State getSingleOperandSate() {
+        return singleOperandSate;
     }
 
     public State getState() {
         return state;
     }
 
-    public State getDoneState(){
-        return doneState;
-    }
     public EditText getInput(){
         return input;
     }
@@ -202,5 +219,33 @@ public class Calculator extends Activity {
     public void showError(){
         input.setText(R.string.error);
         result.setText(R.string.error);
+    }
+    public void setOperandOne(){
+        operandOne = Integer.parseInt(input.getText().toString());
+        input.setText("");
+    }
+    public void setOperandTwo(){
+        operandTwo = Integer.parseInt(input.getText().toString());
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.add:
+                operator = '+';
+                break;
+            case R.id.sub:
+                operator = '-';
+                break;
+            case R.id.mul:
+                operator = '*';
+                break;
+            case R.id.div:
+                operator = '/';
+                break;
+            default:
+                break;
+        }
+
     }
 }
