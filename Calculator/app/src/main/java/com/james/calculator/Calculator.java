@@ -67,7 +67,7 @@ public class Calculator extends Activity implements View.OnClickListener {
 
     private float operandOne = 0f;
     private float operandTwo = 0f;
-    private float resultValue = 0f;
+    //private float resultValue = 0f;
     private char operator;
 
 
@@ -368,14 +368,6 @@ public class Calculator extends Activity implements View.OnClickListener {
         return operandTwo;
     }
 
-    /**
-     * 获取最终值
-     *
-     * @return
-     */
-    public float getResultValue() {
-        return resultValue;
-    }
 
     /**
      * 设置当前运算符
@@ -424,7 +416,7 @@ public class Calculator extends Activity implements View.OnClickListener {
         result.setText("");
         operandOne = 0f;
         operandTwo = 0f;
-        resultValue = 0f;
+        //resultValue = 0f;
     }
 
     /**
@@ -490,20 +482,20 @@ public class Calculator extends Activity implements View.OnClickListener {
         switch (operator)
         {
             case '+':
-                resultValue = operandOne + operandTwo;
+                operandOne = operandOne + operandTwo;
                 break;
             case '-':
-                resultValue = operandOne - operandTwo;
+                operandOne = operandOne - operandTwo;
                 break;
             case '*':
-                resultValue = operandOne * operandTwo;
+                operandOne = operandOne * operandTwo;
                 break;
             case '/':
                 if (operandTwo == 0f)
                 {
                     return false;
                 }
-                resultValue = operandOne / operandTwo;
+                operandOne = operandOne / operandTwo;
                 break;
             default:
                 break;
@@ -531,15 +523,15 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 显示时追加 = 号
      */
     public void showUltimateResult() {
-        getInput().setText(String.valueOf(resultValue));
-        getResult().setText(getResult().getText().toString() + "=" + String.valueOf(resultValue));
+        getInput().setText(String.valueOf(operandOne));
+        getResult().setText(getResult().getText().toString() + "=" + String.valueOf(operandOne));
     }
 
     /**
      *
      */
     public void showUltimateResultInInput(){
-        getInput().setText(getInput().getText().append(String.valueOf(resultValue)));
+        getInput().setText(getInput().getText().append(String.valueOf(operandOne)));
     }
 
     /**

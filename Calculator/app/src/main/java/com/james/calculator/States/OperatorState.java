@@ -75,6 +75,7 @@ public class OperatorState implements State {
         calculator.clearResult();
         if (calculator.calculate()){
             calculator.clearResult();
+            calculator.clearInput();
             //calculator.showUltimateResult();
             calculator.showUltimateResultInInput();
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());

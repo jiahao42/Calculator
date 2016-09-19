@@ -60,7 +60,10 @@ public class SingleOperandDoneWithSelfState implements State {
     @Override
     public void onEqualPressed() {
         if (calculator.calculate()){
-            calculator.setCurrentState(calculator.getSingleOperandState());
+            // TODO: 2016/9/19 今夜做到这里
+            calculator.clearInput();
+            calculator.showUltimateResultInInput();
+            calculator.setCurrentState(calculator.getOperatorState());
         }else {
             calculator.showError();
             calculator.setCurrentState(calculator.getErrorState());
@@ -69,7 +72,7 @@ public class SingleOperandDoneWithSelfState implements State {
 
     @Override
     public String toString() {
-        return "SingleOperandDoneState{" +
+        return "SingleOperandDoneWithSelfState{" +
                 "calculator=" + calculator +
                 '}';
     }
