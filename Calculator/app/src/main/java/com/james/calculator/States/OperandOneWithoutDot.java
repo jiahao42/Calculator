@@ -37,6 +37,7 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void findOperator(char operator) {
+        // TODO: 2016/9/19 something Wrong 
         calculator.setOperandTwoWithOperandOne();
         calculator.setOperator(operator);
         calculator.appendOperand(String.valueOf(calculator.getOperandOne()));
