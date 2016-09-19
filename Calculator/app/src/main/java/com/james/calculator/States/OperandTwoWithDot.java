@@ -68,6 +68,7 @@ public class OperandTwoWithDot implements State {
     @Override
     public void onEqualPressed() {
         if (calculator.calculate()){
+            calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
             calculator.showUltimateResult();
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
         }else {

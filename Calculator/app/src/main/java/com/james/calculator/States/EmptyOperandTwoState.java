@@ -16,7 +16,8 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void findDot() {
-
+        calculator.setOperandTwo();
+        calculator.setCurrentState(calculator.getOperandTwoWithDot());
     }
 
     /**
@@ -24,7 +25,8 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void findDigit() {
-
+        calculator.setOperandTwo();
+        calculator.setCurrentState(calculator.getOperandTwoWithoutDot());
     }
 
     /**
@@ -33,7 +35,8 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void findOperator(char operator) {
-
+        calculator.changeOperator(operator);
+        calculator.setCurrentState(calculator.getOperatorState());
     }
 
     /**
@@ -41,7 +44,7 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void onCEPressed() {
-
+        calculator.setCurrentState(calculator.getEmptyOperandTwoState());
     }
 
     /**
@@ -49,7 +52,8 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void onCPressed() {
-
+        calculator.resetAll();
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -57,7 +61,13 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void onEqualPressed() {
-
+        if (calculator.calculate()){
+            calculator.showUltimateResult();
+            calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
+        }else{
+            calculator.showError();
+            calculator.setCurrentState(calculator.getErrorState());
+        }
     }
 
     @Override

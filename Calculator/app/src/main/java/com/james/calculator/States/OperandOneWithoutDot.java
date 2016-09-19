@@ -1,7 +1,5 @@
 package com.james.calculator.States;
 
-import android.util.Log;
-
 import com.james.calculator.Calculator;
 
 /**
@@ -41,6 +39,7 @@ public class OperandOneWithoutDot implements State {
     public void findOperator(char operator) {
         calculator.setOperandTwoWithOperandOne();
         calculator.setOperator(operator);
+        calculator.appendOperand(String.valueOf(calculator.getOperandOne()));
         calculator.appendOperator(operator);
         calculator.clearInput();
         calculator.setCurrentState(calculator.getOperatorState());

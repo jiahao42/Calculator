@@ -50,8 +50,10 @@ public class SingleOperandState implements State {
      */
     @Override
     public void onCPressed() {
-
+        calculator.resetAll();
+        calculator.setCurrentState(calculator.getInitState());
     }
+
 
     /**
      * 当按下等号时作出的应对

@@ -66,12 +66,17 @@ public class OperatorState implements State {
      * 操作数1 = 操作数2
      * 若按下等于号
      * 则直接运算 op1 op op2
+     * 而且 根据Windows计算器
+     * Result框不显示 结果直接显示在input框中
+     * 作为新的Operand1
      */
     @Override
     public void onEqualPressed() {
         calculator.clearResult();
         if (calculator.calculate()){
-            calculator.showUltimateResult();
+            calculator.clearResult();
+            //calculator.showUltimateResult();
+            calculator.showUltimateResultInInput();
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
         }else {
             Log.d("--Error--",this.toString());

@@ -1,7 +1,5 @@
 package com.james.calculator.States;
 
-import android.util.Log;
-
 import com.james.calculator.Calculator;
 
 /**
