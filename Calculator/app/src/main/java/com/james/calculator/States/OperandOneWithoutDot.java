@@ -27,7 +27,7 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void findDigit() {
-        calculator.getOperandOne();
+        calculator.setOperandOne();
         calculator.setState(calculator.getOperandOneWithoutDot());
     }
 
@@ -36,6 +36,7 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void findOperator() {
+        calculator.setOperandTwoWithOperandOne();
         calculator.setState(calculator.getOperatorState());
     }
 

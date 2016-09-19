@@ -3,7 +3,7 @@ package com.james.calculator.States;
 import com.james.calculator.Calculator;
 
 /**
- * 对应图中状态7
+ * 对应图中状态7(暂定12)
  */
 public class SingleOperandDoneState implements State {
 
@@ -17,7 +17,7 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void findDot() {
-
+        calculator.setState(calculator.getSingleOperandDoneState());
     }
 
     /**
@@ -25,7 +25,7 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void findDigit() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -33,7 +33,7 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void findOperator() {
-
+        calculator.setState(calculator.getOperatorState());
     }
 
     /**
@@ -41,7 +41,7 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void onCEPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -49,7 +49,7 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void onCPressed() {
-
+        calculator.setState(calculator.getInitState());
     }
 
     /**
@@ -57,6 +57,10 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void onEqualPressed() {
-
+        if (calculator.calculate()){
+            calculator.setState(calculator.getSingleOperandDoneState());
+        }else {
+            calculator.setState(calculator.getErrorState());
+        }
     }
 }

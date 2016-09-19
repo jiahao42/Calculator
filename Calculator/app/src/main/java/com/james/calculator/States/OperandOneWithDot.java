@@ -35,6 +35,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void findOperator() {
+        calculator.setOperandTwoWithOperandOne();
         calculator.setState(calculator.getOperatorState());
     }
 

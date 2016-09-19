@@ -58,6 +58,6 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getDoneState());
+        calculator.setState(calculator.getSingleOperandDoneState());
     }
 }

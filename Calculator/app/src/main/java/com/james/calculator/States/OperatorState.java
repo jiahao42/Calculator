@@ -42,7 +42,7 @@ public class OperatorState implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.setState(calculator.getEmptyOperandTwoState());
     }
 
     /**
@@ -58,6 +58,6 @@ public class OperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getDoneState());
+        calculator.setState(calculator.getSingleOperandDoneState());
     }
 }
