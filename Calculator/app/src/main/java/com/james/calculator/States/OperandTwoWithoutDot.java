@@ -47,6 +47,21 @@ public class OperandTwoWithoutDot implements State {
     }
 
     /**
+     * 当按下等号时作出的应对
+     */
+    @Override
+    public void onEqualPressed() {
+        if (calculator.calculate()){
+            calculator.showUltimateResult();
+            calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
+        }else {
+            Log.d("--Error--",this.toString());
+            calculator.showError();
+            calculator.setCurrentState(calculator.getErrorState());
+        }
+    }
+
+    /**
      * 当按下CE时应作出的应对
      */
     @Override
@@ -61,16 +76,6 @@ public class OperandTwoWithoutDot implements State {
     public void onCPressed() {
         calculator.resetAll();
         calculator.setCurrentState(calculator.getInitState());
-    }
-
-    /**
-     * 当按下等号时作出的应对
-     */
-    @Override
-    public void onEqualPressed() {
-        calculator.calculate();
-        calculator.showUltimateResult();
-        calculator.setCurrentState(calculator.getSingleOperandDoneState());
     }
 
     @Override

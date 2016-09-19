@@ -18,7 +18,7 @@ import com.james.calculator.States.OperandTwoWithDot;
 import com.james.calculator.States.OperandTwoWithoutDot;
 import com.james.calculator.States.OperatorState;
 import com.james.calculator.States.ReplaceableOperatorState;
-import com.james.calculator.States.SingleOperandDoneState;
+import com.james.calculator.States.SingleOperandDoneWithSelfState;
 import com.james.calculator.States.SingleOperandState;
 import com.james.calculator.States.State;
 
@@ -56,7 +56,7 @@ public class Calculator extends Activity implements View.OnClickListener {
     private State replaceableOperatorState;
     private State doubleOperandDoneState;
     private State emptyOperandTwoState;
-    private State singleOperandDoneState;
+    private State singleOperandDoneWithSelfState;
     private State singleOperandSate;
     private State currentState;
 
@@ -157,7 +157,7 @@ public class Calculator extends Activity implements View.OnClickListener {
         this.replaceableOperatorState = new ReplaceableOperatorState(this);
         this.doubleOperandDoneState = new DoubleOperandDoneState(this);
         this.emptyOperandTwoState = new EmptyOperandTwoState(this);
-        this.singleOperandDoneState = new SingleOperandDoneState(this);
+        this.singleOperandDoneWithSelfState = new SingleOperandDoneWithSelfState(this);
         this.singleOperandSate = new SingleOperandState(this);
         this.currentState = this.initState;
     }
@@ -298,8 +298,8 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 获取SingleOperandDoneState的实例
      * @return
      */
-    public State getSingleOperandDoneState() {
-        return singleOperandDoneState;
+    public State getSingleOperandDoneWithSelfState() {
+        return singleOperandDoneWithSelfState;
     }
 
     /**
@@ -372,6 +372,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * @param operator
      */
     public void appendOperator(char operator){
+        Log.d("---OperatorChanged---",String.valueOf(operator));
         getResult().setText(getResult().getText().toString() + String.valueOf(operator));
     }
 
@@ -381,6 +382,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * @param operator
      */
     public void changeOperator(char operator){
+        Log.d("---OperatorChanged---",String.valueOf(operator));
         getResult().setText(getResult().getText().toString().replaceFirst("[\\+\\-\\*/]",String.valueOf(operator)));
     }
 
@@ -415,8 +417,8 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 设置操作数2
      */
     public void setOperandTwo() {
-        Log.d("operandTwo",String .valueOf(operandTwo));
         operandTwo = Integer.parseInt(input.getText().toString());
+        Log.d("operandTwo",String .valueOf(operandTwo));
     }
 
     /**
@@ -442,8 +444,8 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 将操作数1的值赋给操作数2
      */
     public void setOperandTwoWithOperandOne() {
-        Log.d("OperandTwo",String.valueOf(operandTwo));
         operandTwo = operandOne;
+        Log.d("OperandTwo",String.valueOf(operandTwo));
     }
 
     /**
@@ -485,6 +487,12 @@ public class Calculator extends Activity implements View.OnClickListener {
         getInput().setText("");
     }
 
+    /**
+     * 清空答案框
+     */
+    public void clearResult(){
+        getResult().setText("");
+    }
     /**
      * 显示最终答案，这是在按下等于号的情况
      * 显示时追加 = 号

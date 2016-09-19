@@ -20,6 +20,7 @@ public class OperandOneWithDot implements State {
      */
     @Override
     public void findDot() {
+        calculator.showError();
         calculator.setCurrentState(calculator.getErrorState());
     }
 

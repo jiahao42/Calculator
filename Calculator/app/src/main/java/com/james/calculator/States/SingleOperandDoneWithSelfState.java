@@ -3,12 +3,12 @@ package com.james.calculator.States;
 import com.james.calculator.Calculator;
 
 /**
- * 对应图中状态7(暂定12)
+ * 对应图中状态7
  */
-public class SingleOperandDoneState implements State {
+public class SingleOperandDoneWithSelfState implements State {
 
     Calculator calculator;
-    public SingleOperandDoneState(Calculator calculator) {
+    public SingleOperandDoneWithSelfState(Calculator calculator) {
         this.calculator = calculator;
     }
 
@@ -17,7 +17,7 @@ public class SingleOperandDoneState implements State {
      */
     @Override
     public void findDot() {
-        calculator.setCurrentState(calculator.getSingleOperandDoneState());
+        calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
     }
 
     /**
@@ -60,8 +60,9 @@ public class SingleOperandDoneState implements State {
     @Override
     public void onEqualPressed() {
         if (calculator.calculate()){
-            calculator.setCurrentState(calculator.getSingleOperandDoneState());
+            calculator.setCurrentState(calculator.getSingleOperandState());
         }else {
+            calculator.showError();
             calculator.setCurrentState(calculator.getErrorState());
         }
     }

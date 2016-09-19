@@ -21,6 +21,7 @@ public class OperandTwoWithDot implements State {
     @Override
     public void findDot() {
         calculator.setOperandTwo();
+        calculator.showError();
         calculator.setCurrentState(calculator.getErrorState());
     }
 
@@ -66,9 +67,14 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.calculate();
-        calculator.showUltimateResult();
-        calculator.setCurrentState(calculator.getSingleOperandDoneState());
+        if (calculator.calculate()){
+            calculator.showUltimateResult();
+            calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
+        }else {
+            Log.d("--Error--",this.toString());
+            calculator.showError();
+            calculator.setCurrentState(calculator.getErrorState());
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.james.calculator.States;
 
+import android.util.Log;
+
 import com.james.calculator.Calculator;
 
 /**
@@ -26,6 +28,7 @@ public class OperatorState implements State {
      */
     @Override
     public void findDigit() {
+        calculator.setOperandTwo();
         calculator.setCurrentState(calculator.getOperandTwoWithoutDot());
     }
 
@@ -59,10 +62,22 @@ public class OperatorState implements State {
 
     /**
      * 当按下等号时作出的应对
+     * 此时操作符刚刚输入完毕
+     * 操作数1 = 操作数2
+     * 若按下等于号
+     * 则直接运算 op1 op op2
      */
     @Override
     public void onEqualPressed() {
-        calculator.setCurrentState(calculator.getSingleOperandDoneState());
+        calculator.clearResult();
+        if (calculator.calculate()){
+            calculator.showUltimateResult();
+            calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
+        }else {
+            Log.d("--Error--",this.toString());
+            calculator.showError();
+            calculator.setCurrentState(calculator.getErrorState());
+        }
     }
 
     @Override
