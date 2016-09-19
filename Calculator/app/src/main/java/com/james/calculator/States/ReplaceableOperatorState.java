@@ -31,9 +31,10 @@ public class ReplaceableOperatorState implements State {
 
     /**
      * 当找到运算符时应该作出的应对
+     * @param operator
      */
     @Override
-    public void findOperator() {
+    public void findOperator(char operator) {
         calculator.setCurrentState(calculator.getOperatorState());
     }
 

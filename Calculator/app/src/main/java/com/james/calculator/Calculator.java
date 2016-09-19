@@ -81,6 +81,9 @@ public class Calculator extends Activity implements View.OnClickListener {
         initOtherListener();
     }
 
+    /**
+     * Bind各种控件
+     */
     private void initWidget(){
         result = (TextView)findViewById(R.id.result);
         input = (EditText)findViewById(R.id.input);
@@ -103,6 +106,9 @@ public class Calculator extends Activity implements View.OnClickListener {
         equal = (Button) findViewById(R.id.equal);
     }
 
+    /**
+     * 为所有数字按钮注册监听器
+     */
     private void initDigitListener() {
         myDigitListener = new MyDigitListener();
         btnZero.setOnClickListener(myDigitListener);
@@ -116,6 +122,10 @@ public class Calculator extends Activity implements View.OnClickListener {
         btnEight.setOnClickListener(myDigitListener);
         btnNine.setOnClickListener(myDigitListener);
     }
+
+    /**
+     * 为所有运算符注册监听器
+     */
     private void initOperatorListener(){
         myOperatorListener = new MyOperatorListener();
         add.setOnClickListener(myOperatorListener);
@@ -125,11 +135,17 @@ public class Calculator extends Activity implements View.OnClickListener {
         equal.setOnClickListener(myOperatorListener);
     }
 
+    /**
+     * 注册其他监听器
+     */
     private void initOtherListener(){
         btnClearAll.setOnClickListener(this);
         btnClearOperand.setOnClickListener(this);
     }
 
+    /**
+     * 初始化所有状态
+     */
     public Calculator() {
         this.errorState = new ErrorState(this);
         this.initState = new InitState(this);
@@ -147,106 +163,229 @@ public class Calculator extends Activity implements View.OnClickListener {
     }
 
 
+    /**
+     * 找到小数点时
+     */
     public void findDot() {
         currentState.findDot();
     }
 
+    /**
+     * 找到数字时
+     */
     public void findDigit() {
         currentState.findDigit();
     }
 
+    /**
+     * 找到运算符时
+     */
     public void findOperator() {
-        currentState.findOperator();
+        currentState.findOperator(operator);
     }
 
+    /**
+     * 按下CE时
+     */
     public void onCEPressed() {
         currentState.onCEPressed();
     }
 
+    /**
+     * 按下C时
+     */
     public void onCPressed() {
         currentState.onCPressed();
     }
 
+    /**
+     * 按下等于时
+     */
     public void onEqualPressed() {
         currentState.onEqualPressed();
     }
 
+    /**
+     * 设置当前的状态
+     * @param currentState
+     */
     public void setCurrentState(State currentState) {
         this.currentState = currentState;
     }
 
+    /**
+     * 返回ErrorState的实例
+     * @return
+     */
     public State getErrorState() {
         return errorState;
     }
 
+    /**
+     * 返回InitState的实例
+     * @return
+     */
     public State getInitState() {
         return initState;
     }
 
+    /**
+     * 返回OperandOneWithDot的实例
+     * @return
+     */
     public State getOperandOneWithDot() {
         return operandOneWithDot;
     }
 
+    /**
+     * 返回OperandOneWithoutDot的实例
+     * @return
+     */
     public State getOperandOneWithoutDot() {
         return operandOneWithoutDot;
     }
 
+    /**
+     * 返回OperandTwoWithDot的实例
+     * @return
+     */
     public State getOperandTwoWithDot() {
         return operandTwoWithDot;
     }
 
+    /**
+     * 返回OperandTwoWithoutDot的实例
+     * @return
+     */
     public State getOperandTwoWithoutDot() {
         return operandTwoWithoutDot;
     }
 
+    /**
+     * 返回OperatorState的实例
+     * @return
+     */
     public State getOperatorState() {
         return operatorState;
     }
 
+    /**
+     * 获取ReplaceableOperatorState的实例
+     * @return
+     */
     public State getReplaceableOperatorState() {
         return replaceableOperatorState;
     }
 
+    /**
+     * 获取DoubleOperandDoneState的实例
+     * @return
+     */
     public State getDoubleOperandDoneState() {
         return doubleOperandDoneState;
     }
 
+    /**
+     * 获取EmptyOperandTwoState的实例
+     * @return
+     */
     public State getEmptyOperandTwoState() {
         return emptyOperandTwoState;
     }
 
+    /**
+     * 获取SingleOperandDoneState的实例
+     * @return
+     */
     public State getSingleOperandDoneState() {
         return singleOperandDoneState;
     }
 
-    public State getSingleOperandSate() {
+    /**
+     * 获取SingleOperandState的实例
+     * @return
+     */
+    public State getSingleOperandState() {
         return singleOperandSate;
     }
 
+    /**
+     * 获取当前状态的实例
+     * @return
+     */
     public State getCurrentState() {
         return currentState;
     }
 
+    /**
+     * 获取输入框的实例
+     * @return
+     */
     public EditText getInput() {
         return input;
     }
 
+    /**
+     * 获取展示框的实例
+     * @return
+     */
     public TextView getResult() {
         return result;
     }
 
+    /**
+     * 获取操作数1
+     * @return
+     */
     public float getOperandOne() {
         return operandOne;
     }
 
+    /**
+     * 获取操作数2
+     * @return
+     */
     public float getOperandTwo() {
         return operandTwo;
     }
 
+    /**
+     * 获取最终值
+     * @return
+     */
     public float getResultValue() {
         return resultValue;
     }
 
+    /**
+     * 设置当前运算符
+     * @param operator
+     */
+    public void setOperator(char operator) {
+        Log.d("Operator",String.valueOf(operator));
+        this.operator = operator;
+    }
+
+    /**
+     * 要在Result中追加一个运算符
+     * @param operator
+     */
+    public void appendOperator(char operator){
+        getResult().setText(getResult().getText().toString() + String.valueOf(operator));
+    }
+
+    /**
+     * Result中已经有运算符，要更改此运算符
+     * 通过正则匹配到该运算符，然后替换之
+     * @param operator
+     */
+    public void changeOperator(char operator){
+        getResult().setText(getResult().getText().toString().replaceFirst("[\\+\\-\\*/]",String.valueOf(operator)));
+    }
+
+    /**
+     * 重置所有变量
+     */
     public void resetAll() {
         input.setText("");
         result.setText("");
@@ -255,21 +394,34 @@ public class Calculator extends Activity implements View.OnClickListener {
         resultValue = 0f;
     }
 
+    /**
+     * 设置错误信息
+     */
     public void showError() {
         input.setText(R.string.error);
         result.setText(R.string.error);
     }
 
+    /**
+     * 设置操作数1
+     */
     public void setOperandOne() {
         operandOne = Integer.parseInt(input.getText().toString());
         Log.d("operandOne",String .valueOf(operandOne));
     }
 
+    /**
+     * 设置操作数2
+     */
     public void setOperandTwo() {
         Log.d("operandTwo",String .valueOf(operandTwo));
         operandTwo = Integer.parseInt(input.getText().toString());
     }
 
+    /**
+     * 注册监听器
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         switch (view.getId())
@@ -285,13 +437,21 @@ public class Calculator extends Activity implements View.OnClickListener {
         }
     }
 
+    /**
+     * 将操作数1的值赋给操作数2
+     */
     public void setOperandTwoWithOperandOne() {
+        Log.d("OperandTwo",String.valueOf(operandTwo));
         operandTwo = operandOne;
     }
 
+    /**
+     * 计算结果
+     * @return  除数为0则返回false，其余返回true
+     */
     public boolean calculate() {
-        Log.d("operatorOne",String.valueOf(operandOne));
-        Log.d("operatorTwo",String.valueOf(operandTwo));
+        Log.d("operandOne",String.valueOf(operandOne));
+        Log.d("operandTwo",String.valueOf(operandTwo));
         switch (operator)
         {
             case '+':
@@ -316,6 +476,9 @@ public class Calculator extends Activity implements View.OnClickListener {
         return true;
     }
 
+    /**
+     * 所有数字按钮的监听器
+     */
     private class MyDigitListener implements View.OnClickListener {
 
         @Override
@@ -375,35 +538,38 @@ public class Calculator extends Activity implements View.OnClickListener {
             }
         }
     }
+
+    /**
+     * 所有操作符的监听器
+     */
     private class MyOperatorListener implements View.OnClickListener{
 
         @Override
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.add:
-                    findOperator();
-                    result.setText(result.getText().toString() + "+");
                     operator = '+';
+                    findOperator();
                     break;
                 case R.id.sub:
-                    findOperator();
-                    result.setText(result.getText().toString() + "-");
                     operator = '-';
+                    findOperator();
+                    //result.setText(result.getText().toString() + "-");
                     break;
                 case R.id.mul:
-                    findOperator();
-                    result.setText(result.getText().toString() + "*");
                     operator = '*';
+                    findOperator();
+                    //result.setText(result.getText().toString() + "*");
                     break;
                 case R.id.div:
-                    findOperator();
-                    result.setText(result.getText().toString() + "/");
                     operator = '/';
+                    findOperator();
+                    //result.setText(result.getText().toString() + "/");
                     break;
                 case R.id.equal:
                     calculate();
                     onEqualPressed();
-                    result.setText(result.getText().toString() + String.valueOf(resultValue));
+                    //result.setText(result.getText().toString() + String.valueOf(resultValue));
                     break;
                 default:
                     break;

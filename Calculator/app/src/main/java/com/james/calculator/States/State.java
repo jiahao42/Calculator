@@ -13,8 +13,9 @@ public interface State {
 
     /**
      * 当找到运算符时应该作出的应对
+     * @param operator  运算符
      */
-    void findOperator();
+    void findOperator(char operator);
 
     /**
      * 当按下CE时应作出的应对

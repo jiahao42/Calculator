@@ -32,9 +32,10 @@ public class ErrorState implements State {
 
     /**
      * 当找到运算符时应该作出的应对
+     * @param operator
      */
     @Override
-    public void findOperator() {
+    public void findOperator(char operator) {
         calculator.showError();
         calculator.setCurrentState(calculator.getErrorState());
     }
