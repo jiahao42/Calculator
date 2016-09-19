@@ -1,13 +1,6 @@
 package com.james.calculator.States;
 
-import com.james.calculator.Calculator;
-
-public class DoneState implements State {
-    Calculator calculator;
-    public DoneState(Calculator calculator) {
-        this.calculator = calculator;
-    }
-
+public class EmptyOperandTwoState implements State {
     /**
      * 当找到小数点时应当作出的应对
      */

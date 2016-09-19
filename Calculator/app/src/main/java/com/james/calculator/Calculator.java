@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.james.calculator.States.DoneState;
+import com.james.calculator.States.DoubleOperandDoneState;
 import com.james.calculator.States.ErrorState;
 import com.james.calculator.States.InitState;
 import com.james.calculator.States.OperandOneWithDot;
@@ -16,7 +16,7 @@ import com.james.calculator.States.OperandTwoWithDot;
 import com.james.calculator.States.OperandTwoWithoutDot;
 import com.james.calculator.States.OperatorState;
 import com.james.calculator.States.ReplaceableOperatorState;
-import com.james.calculator.States.SingleOperand;
+import com.james.calculator.States.SingleOperandDoneState;
 import com.james.calculator.States.State;
 
 import butterknife.Bind;
@@ -102,8 +102,8 @@ public class Calculator extends Activity {
         this.operandTwoWithoutDot = new OperandTwoWithoutDot(this);
         this.operatorState = new OperatorState(this);
         this.replaceableOperatorState = new ReplaceableOperatorState(this);
-        this.singleOperand = new SingleOperand(this);
-        this.doneState = new DoneState(this);
+        this.singleOperand = new SingleOperandDoneState(this);
+        this.doneState = new DoubleOperandDoneState(this);
     }
 
     public void findDot() {
@@ -176,5 +176,31 @@ public class Calculator extends Activity {
 
     public State getDoneState(){
         return doneState;
+    }
+    public EditText getInput(){
+        return input;
+    }
+    public TextView getResult(){
+        return result;
+    }
+    public float getOperandOne(){
+        return operandOne;
+    }
+    public float getOperandTwo(){
+        return operandTwo;
+    }
+    public float getResultValue(){
+        return resultValue;
+    }
+    public void resetAll(){
+        input.setText("");
+        result.setText("");
+        operandOne = 0f;
+        operandTwo = 0f;
+        resultValue = 0f;
+    }
+    public void showError(){
+        input.setText(R.string.error);
+        result.setText(R.string.error);
     }
 }

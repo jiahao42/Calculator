@@ -13,7 +13,8 @@ public class ErrorState implements State {
      */
     @Override
     public void findDot() {
-
+        calculator.showError();
+        calculator.setState(calculator.getErrorState());
     }
 
     /**
@@ -21,6 +22,8 @@ public class ErrorState implements State {
      */
     @Override
     public void findDigit() {
+        calculator.showError();
+        calculator.setState(calculator.getErrorState());
 
     }
 
@@ -29,7 +32,8 @@ public class ErrorState implements State {
      */
     @Override
     public void findOperator() {
-
+        calculator.showError();
+        calculator.setState(calculator.getErrorState());
     }
 
     /**

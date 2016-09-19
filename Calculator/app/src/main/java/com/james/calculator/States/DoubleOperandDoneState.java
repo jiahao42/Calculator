@@ -2,11 +2,9 @@ package com.james.calculator.States;
 
 import com.james.calculator.Calculator;
 
-public class ReplaceableOperatorState implements State {
-
-
+public class DoubleOperandDoneState implements State {
     Calculator calculator;
-    public ReplaceableOperatorState(Calculator calculator) {
+    public DoubleOperandDoneState(Calculator calculator) {
         this.calculator = calculator;
     }
 
@@ -15,7 +13,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void findDot() {
-        calculator.setState(calculator.getOperandTwoWithDot());
+
     }
 
     /**
@@ -23,7 +21,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void findDigit() {
-        calculator.setState(calculator.getOperandTwoWithoutDot());
+
     }
 
     /**
@@ -31,7 +29,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void findOperator() {
-        calculator.setState(calculator.getOperatorState());
+
     }
 
     /**
@@ -39,7 +37,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getReplaceableOperatorState());
+
     }
 
     /**
@@ -47,7 +45,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onCPressed() {
-        calculator.setState(calculator.getInitState());
+
     }
 
     /**
@@ -55,6 +53,6 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getDoneState());
+
     }
 }
