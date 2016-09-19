@@ -1,5 +1,7 @@
 package com.james.calculator.States;
 
+import android.util.Log;
+
 import com.james.calculator.Calculator;
 
 /**
@@ -37,6 +39,9 @@ public class OperandOneWithDot implements State {
     @Override
     public void findOperator(char operator) {
         calculator.setOperandTwoWithOperandOne();
+        calculator.setOperator(operator);
+        calculator.appendOperator(operator);
+        calculator.clearInput();
         calculator.setCurrentState(calculator.getOperatorState());
     }
 
@@ -64,5 +69,12 @@ public class OperandOneWithDot implements State {
     @Override
     public void onEqualPressed() {
         calculator.setCurrentState(calculator.getOperandOneWithDot());
+    }
+
+    @Override
+    public String toString() {
+        return "OperandOneWithDot{" +
+                "calculator=" + calculator +
+                '}';
     }
 }

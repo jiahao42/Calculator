@@ -59,4 +59,11 @@ public class EmptyOperandTwoState implements State {
     public void onEqualPressed() {
 
     }
+
+    @Override
+    public String toString() {
+        return "EmptyOperandTwoState{" +
+                "calculator=" + calculator +
+                '}';
+    }
 }

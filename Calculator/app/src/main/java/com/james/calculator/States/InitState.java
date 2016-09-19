@@ -1,5 +1,7 @@
 package com.james.calculator.States;
 
+import android.util.Log;
+
 import com.james.calculator.Calculator;
 
 /**
@@ -59,5 +61,12 @@ public class InitState implements State {
     @Override
     public void onEqualPressed() {
         calculator.setCurrentState(calculator.getInitState());
+    }
+
+    @Override
+    public String toString() {
+        return "InitState{" +
+                "calculator=" + calculator +
+                '}';
     }
 }

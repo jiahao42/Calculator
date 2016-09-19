@@ -1,5 +1,7 @@
 package com.james.calculator.States;
 
+import android.util.Log;
+
 import com.james.calculator.Calculator;
 
 /**
@@ -20,6 +22,7 @@ public class OperandTwoWithoutDot implements State {
     @Override
     public void findDot() {
         calculator.setOperandTwo();
+        Log.d("StateChanged","ErrorState");
         calculator.setCurrentState(calculator.getOperandTwoWithDot());
     }
 
@@ -39,6 +42,7 @@ public class OperandTwoWithoutDot implements State {
     @Override
     public void findOperator(char operator) {
         calculator.setOperandTwoWithOperandOne();
+        calculator.appendOperator(operator);
         calculator.setCurrentState(calculator.getDoubleOperandDoneState());
     }
 
@@ -64,6 +68,15 @@ public class OperandTwoWithoutDot implements State {
      */
     @Override
     public void onEqualPressed() {
+        calculator.calculate();
+        calculator.showUltimateResult();
         calculator.setCurrentState(calculator.getSingleOperandDoneState());
+    }
+
+    @Override
+    public String toString() {
+        return "OperandTwoWithoutDot{" +
+                "calculator=" + calculator +
+                '}';
     }
 }

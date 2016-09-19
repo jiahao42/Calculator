@@ -35,7 +35,8 @@ public class OperatorState implements State {
      */
     @Override
     public void findOperator(char operator) {
-
+        calculator.changeOperator(operator);
+        calculator.clearInput();
         calculator.setCurrentState(calculator.getOperatorState());
     }
 
@@ -62,5 +63,12 @@ public class OperatorState implements State {
     @Override
     public void onEqualPressed() {
         calculator.setCurrentState(calculator.getSingleOperandDoneState());
+    }
+
+    @Override
+    public String toString() {
+        return "OperatorState{" +
+                "calculator=" + calculator +
+                '}';
     }
 }

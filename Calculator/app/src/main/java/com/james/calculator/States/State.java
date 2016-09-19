@@ -31,4 +31,5 @@ public interface State {
      * 当按下等号时作出的应对
      */
     void onEqualPressed();
+
 }

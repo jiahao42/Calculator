@@ -210,6 +210,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * @param currentState
      */
     public void setCurrentState(State currentState) {
+        Log.d("-----StateChanged-----",currentState.toString());
         this.currentState = currentState;
     }
 
@@ -476,6 +477,22 @@ public class Calculator extends Activity implements View.OnClickListener {
         return true;
     }
 
+    /**
+     * 清空输入框
+     * 当按下运算符时，要清空
+     */
+    public void clearInput(){
+        getInput().setText("");
+    }
+
+    /**
+     * 显示最终答案，这是在按下等于号的情况
+     * 显示时追加 = 号
+     */
+    public void showUltimateResult(){
+        getInput().setText(String.valueOf(resultValue));
+        getResult().setText(getResult().getText().toString() + "=" + String.valueOf(resultValue));
+    }
     /**
      * 所有数字按钮的监听器
      */

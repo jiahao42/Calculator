@@ -59,4 +59,11 @@ public class DoubleOperandDoneState implements State {
     public void onEqualPressed() {
 
     }
+
+    @Override
+    public String toString() {
+        return "DoubleOperandDoneState{" +
+                "calculator=" + calculator +
+                '}';
+    }
 }

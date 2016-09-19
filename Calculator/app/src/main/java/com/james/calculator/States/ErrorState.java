@@ -64,4 +64,11 @@ public class ErrorState implements State {
         calculator.showError();
         calculator.setCurrentState(calculator.getErrorState());
     }
+
+    @Override
+    public String toString() {
+        return "ErrorState{" +
+                "calculator=" + calculator +
+                '}';
+    }
 }

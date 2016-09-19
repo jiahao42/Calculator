@@ -62,4 +62,11 @@ public class ReplaceableOperatorState implements State {
     public void onEqualPressed() {
         calculator.setCurrentState(calculator.getSingleOperandDoneState());
     }
+
+    @Override
+    public String toString() {
+        return "ReplaceableOperatorState{" +
+                "calculator=" + calculator +
+                '}';
+    }
 }

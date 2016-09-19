@@ -65,4 +65,11 @@ public class SingleOperandDoneState implements State {
             calculator.setCurrentState(calculator.getErrorState());
         }
     }
+
+    @Override
+    public String toString() {
+        return "SingleOperandDoneState{" +
+                "calculator=" + calculator +
+                '}';
+    }
 }
