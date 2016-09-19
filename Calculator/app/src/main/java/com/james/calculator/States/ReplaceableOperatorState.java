@@ -18,7 +18,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void findDot() {
-        calculator.setState(calculator.getOperandTwoWithDot());
+        calculator.setCurrentState(calculator.getOperandTwoWithDot());
     }
 
     /**
@@ -26,7 +26,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void findDigit() {
-        calculator.setState(calculator.getOperandTwoWithoutDot());
+        calculator.setCurrentState(calculator.getOperandTwoWithoutDot());
     }
 
     /**
@@ -34,7 +34,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void findOperator() {
-        calculator.setState(calculator.getOperatorState());
+        calculator.setCurrentState(calculator.getOperatorState());
     }
 
     /**
@@ -42,7 +42,7 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getReplaceableOperatorState());
+        calculator.setCurrentState(calculator.getReplaceableOperatorState());
     }
 
     /**
@@ -50,7 +50,8 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onCPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.resetAll();
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -58,6 +59,6 @@ public class ReplaceableOperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getSingleOperandDoneState());
+        calculator.setCurrentState(calculator.getSingleOperandDoneState());
     }
 }

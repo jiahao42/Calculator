@@ -19,8 +19,8 @@ public class OperandTwoWithoutDot implements State {
      */
     @Override
     public void findDot() {
-        calculator.getOperandTwo();
-        calculator.setState(calculator.getOperandTwoWithDot());
+        calculator.setOperandTwo();
+        calculator.setCurrentState(calculator.getOperandTwoWithDot());
     }
 
     /**
@@ -28,8 +28,8 @@ public class OperandTwoWithoutDot implements State {
      */
     @Override
     public void findDigit() {
-        calculator.getOperandTwo();
-        calculator.setState(calculator.getOperandTwoWithoutDot());
+        calculator.setOperandTwo();
+        calculator.setCurrentState(calculator.getOperandTwoWithoutDot());
     }
 
     /**
@@ -38,7 +38,7 @@ public class OperandTwoWithoutDot implements State {
     @Override
     public void findOperator() {
         calculator.setOperandTwoWithOperandOne();
-        calculator.setState(calculator.getDoubleOperandDoneState());
+        calculator.setCurrentState(calculator.getDoubleOperandDoneState());
     }
 
     /**
@@ -46,7 +46,7 @@ public class OperandTwoWithoutDot implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getEmptyOperandTwoState());
+        calculator.setCurrentState(calculator.getEmptyOperandTwoState());
     }
 
     /**
@@ -54,7 +54,8 @@ public class OperandTwoWithoutDot implements State {
      */
     @Override
     public void onCPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.resetAll();
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -62,6 +63,6 @@ public class OperandTwoWithoutDot implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getSingleOperandDoneState());
+        calculator.setCurrentState(calculator.getSingleOperandDoneState());
     }
 }

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.james.calculator.States.DoubleOperandDoneState;
@@ -59,9 +58,13 @@ public class Calculator extends Activity implements View.OnClickListener {
     private State emptyOperandTwoState;
     private State singleOperandDoneState;
     private State singleOperandSate;
-    private MyDigitListener myDigitListener;
+    private State currentState;
 
-    private State state;
+
+    private MyDigitListener myDigitListener;
+    private MyOperatorListener myOperatorListener;
+
+
     private float operandOne = 0f;
     private float operandTwo = 0f;
     private float resultValue = 0f;
@@ -74,6 +77,8 @@ public class Calculator extends Activity implements View.OnClickListener {
         setContentView(R.layout.layout_calculator);
         initWidget();
         initDigitListener();
+        initOperatorListener();
+        initOtherListener();
     }
 
     private void initWidget(){
@@ -100,6 +105,7 @@ public class Calculator extends Activity implements View.OnClickListener {
 
     private void initDigitListener() {
         myDigitListener = new MyDigitListener();
+        btnZero.setOnClickListener(myDigitListener);
         btnOne.setOnClickListener(myDigitListener);
         btnTwo.setOnClickListener(myDigitListener);
         btnThree.setOnClickListener(myDigitListener);
@@ -110,7 +116,19 @@ public class Calculator extends Activity implements View.OnClickListener {
         btnEight.setOnClickListener(myDigitListener);
         btnNine.setOnClickListener(myDigitListener);
     }
+    private void initOperatorListener(){
+        myOperatorListener = new MyOperatorListener();
+        add.setOnClickListener(myOperatorListener);
+        sub.setOnClickListener(myOperatorListener);
+        mul.setOnClickListener(myOperatorListener);
+        div.setOnClickListener(myOperatorListener);
+        equal.setOnClickListener(myOperatorListener);
+    }
 
+    private void initOtherListener(){
+        btnClearAll.setOnClickListener(this);
+        btnClearOperand.setOnClickListener(this);
+    }
 
     public Calculator() {
         this.errorState = new ErrorState(this);
@@ -125,36 +143,36 @@ public class Calculator extends Activity implements View.OnClickListener {
         this.emptyOperandTwoState = new EmptyOperandTwoState(this);
         this.singleOperandDoneState = new SingleOperandDoneState(this);
         this.singleOperandSate = new SingleOperandState(this);
-        this.state = this.initState;
+        this.currentState = this.initState;
     }
 
 
     public void findDot() {
-        state.findDot();
+        currentState.findDot();
     }
 
     public void findDigit() {
-        state.findDigit();
+        currentState.findDigit();
     }
 
     public void findOperator() {
-        state.findOperator();
+        currentState.findOperator();
     }
 
     public void onCEPressed() {
-        state.onCEPressed();
+        currentState.onCEPressed();
     }
 
     public void onCPressed() {
-        state.onCPressed();
+        currentState.onCPressed();
     }
 
     public void onEqualPressed() {
-        state.onEqualPressed();
+        currentState.onEqualPressed();
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
     }
 
     public State getErrorState() {
@@ -205,8 +223,8 @@ public class Calculator extends Activity implements View.OnClickListener {
         return singleOperandSate;
     }
 
-    public State getState() {
-        return state;
+    public State getCurrentState() {
+        return currentState;
     }
 
     public EditText getInput() {
@@ -256,18 +274,6 @@ public class Calculator extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId())
         {
-            case R.id.add:
-                operator = '+';
-                break;
-            case R.id.sub:
-                operator = '-';
-                break;
-            case R.id.mul:
-                operator = '*';
-                break;
-            case R.id.div:
-                operator = '/';
-                break;
             case R.id.btn_clear_all:
                 onCPressed();
                 break;
@@ -284,6 +290,8 @@ public class Calculator extends Activity implements View.OnClickListener {
     }
 
     public boolean calculate() {
+        Log.d("operatorOne",String.valueOf(operandOne));
+        Log.d("operatorTwo",String.valueOf(operandTwo));
         switch (operator)
         {
             case '+':
@@ -363,6 +371,41 @@ public class Calculator extends Activity implements View.OnClickListener {
                     input.setText(input.getText().append('9'));
                     result.setText(result.getText().toString() + "9");
                     findDigit();
+                    break;
+            }
+        }
+    }
+    private class MyOperatorListener implements View.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.add:
+                    findOperator();
+                    result.setText(result.getText().toString() + "+");
+                    operator = '+';
+                    break;
+                case R.id.sub:
+                    findOperator();
+                    result.setText(result.getText().toString() + "-");
+                    operator = '-';
+                    break;
+                case R.id.mul:
+                    findOperator();
+                    result.setText(result.getText().toString() + "*");
+                    operator = '*';
+                    break;
+                case R.id.div:
+                    findOperator();
+                    result.setText(result.getText().toString() + "/");
+                    operator = '/';
+                    break;
+                case R.id.equal:
+                    calculate();
+                    onEqualPressed();
+                    result.setText(result.getText().toString() + String.valueOf(resultValue));
+                    break;
+                default:
                     break;
             }
         }

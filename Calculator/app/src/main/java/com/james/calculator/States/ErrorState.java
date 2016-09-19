@@ -17,7 +17,7 @@ public class ErrorState implements State {
     @Override
     public void findDot() {
         calculator.showError();
-        calculator.setState(calculator.getErrorState());
+        calculator.setCurrentState(calculator.getErrorState());
     }
 
     /**
@@ -26,7 +26,7 @@ public class ErrorState implements State {
     @Override
     public void findDigit() {
         calculator.showError();
-        calculator.setState(calculator.getErrorState());
+        calculator.setCurrentState(calculator.getErrorState());
 
     }
 
@@ -36,7 +36,7 @@ public class ErrorState implements State {
     @Override
     public void findOperator() {
         calculator.showError();
-        calculator.setState(calculator.getErrorState());
+        calculator.setCurrentState(calculator.getErrorState());
     }
 
     /**
@@ -44,7 +44,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -52,7 +52,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onCPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -61,6 +61,6 @@ public class ErrorState implements State {
     @Override
     public void onEqualPressed() {
         calculator.showError();
-        calculator.setState(calculator.getErrorState());
+        calculator.setCurrentState(calculator.getErrorState());
     }
 }

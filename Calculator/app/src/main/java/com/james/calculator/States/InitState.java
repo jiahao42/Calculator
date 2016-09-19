@@ -16,7 +16,7 @@ public class InitState implements State {
      */
     @Override
     public void findDot() {
-        calculator.setState(calculator.getOperandOneWithDot());
+        calculator.setCurrentState(calculator.getOperandOneWithDot());
     }
 
     /**
@@ -24,7 +24,7 @@ public class InitState implements State {
      */
     @Override
     public void findDigit() {
-        calculator.setState(calculator.getOperandOneWithoutDot());
+        calculator.setCurrentState(calculator.getOperandOneWithoutDot());
     }
 
     /**
@@ -32,7 +32,7 @@ public class InitState implements State {
      */
     @Override
     public void findOperator() {
-        calculator.setState(calculator.getInitState());
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -40,7 +40,7 @@ public class InitState implements State {
      */
     @Override
     public void onCEPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -48,7 +48,8 @@ public class InitState implements State {
      */
     @Override
     public void onCPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.resetAll();
+        calculator.setCurrentState(calculator.getInitState());
     }
 
     /**
@@ -56,6 +57,6 @@ public class InitState implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.setState(calculator.getInitState());
+        calculator.setCurrentState(calculator.getInitState());
     }
 }
