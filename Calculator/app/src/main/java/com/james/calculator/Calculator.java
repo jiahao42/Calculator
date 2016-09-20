@@ -405,6 +405,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      */
     public void changeOperator(char operator) {
         Log.d("---OperatorChanged---", String.valueOf(operator));
+        // TODO: 2016/9/20 正则表达式有问题，应该匹配最后一个运算符，而不是第一个 
         getResult().setText(getResult().getText().toString().replaceFirst("[\\+\\-\\*/]", String.valueOf(operator)));
     }
 
