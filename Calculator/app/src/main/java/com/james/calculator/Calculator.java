@@ -431,7 +431,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 设置操作数1
      */
     public void setOperandOne() {
-        operandOne = Integer.parseInt(input.getText().toString());
+        operandOne = Float.parseFloat(input.getText().toString());
         Log.d("operandOne", String.valueOf(operandOne));
     }
 
@@ -439,7 +439,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 设置操作数2
      */
     public void setOperandTwo() {
-        operandTwo = Integer.parseInt(input.getText().toString());
+        operandTwo = Float.parseFloat(input.getText().toString());
         Log.d("operandTwo", String.valueOf(operandTwo));
     }
 
@@ -479,6 +479,7 @@ public class Calculator extends Activity implements View.OnClickListener {
     public boolean calculate() {
         Log.d("operandOne", String.valueOf(operandOne));
         Log.d("operandTwo", String.valueOf(operandTwo));
+        Log.d("Operator",String.valueOf(operator));
         switch (operator)
         {
             case '+':
@@ -626,7 +627,6 @@ public class Calculator extends Activity implements View.OnClickListener {
                     //result.setText(result.getText().toString() + "/");
                     break;
                 case R.id.equal:
-                    calculate();
                     onEqualPressed();
                     //result.setText(result.getText().toString() + String.valueOf(resultValue));
                     break;

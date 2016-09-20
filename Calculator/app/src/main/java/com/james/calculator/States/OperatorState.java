@@ -72,12 +72,11 @@ public class OperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
-        calculator.clearResult();
         if (calculator.calculate()){
             calculator.clearResult();
             calculator.clearInput();
-            //calculator.showUltimateResult();
             calculator.showUltimateResultInInput();
+            Log.d("test",String.valueOf(calculator.getOperandOne()));
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
         }else {
             Log.d("--Error--",this.toString());

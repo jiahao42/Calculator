@@ -34,6 +34,11 @@ public class SingleOperandDoneWithSelfState implements State {
      */
     @Override
     public void findOperator(char operator) {
+        calculator.setOperator(operator);
+        calculator.clearResult();
+        calculator.clearInput();
+        calculator.appendOperand(String.valueOf(calculator.getOperandOne()));
+        calculator.appendOperator(operator);
         calculator.setCurrentState(calculator.getOperatorState());
     }
 
@@ -60,6 +65,7 @@ public class SingleOperandDoneWithSelfState implements State {
     @Override
     public void onEqualPressed() {
         if (calculator.calculate()){
+            calculator.clearResult();
             // TODO: 2016/9/19 今夜做到这里
             calculator.clearInput();
             calculator.showUltimateResultInInput();

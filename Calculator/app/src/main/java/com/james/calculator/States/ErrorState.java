@@ -45,6 +45,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onCEPressed() {
+        calculator.resetAll();
         calculator.setCurrentState(calculator.getInitState());
     }
 
@@ -53,6 +54,7 @@ public class ErrorState implements State {
      */
     @Override
     public void onCPressed() {
+        calculator.resetAll();
         calculator.setCurrentState(calculator.getInitState());
     }
 

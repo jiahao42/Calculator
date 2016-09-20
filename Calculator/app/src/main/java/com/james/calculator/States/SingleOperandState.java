@@ -3,7 +3,7 @@ package com.james.calculator.States;
 import com.james.calculator.Calculator;
 
 /**
- * 对应图中状态12
+ * 对应图中状态12(暂时未投入使用)
  */
 public class SingleOperandState implements State {
     Calculator calculator;

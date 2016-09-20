@@ -36,13 +36,17 @@ public class OperandTwoWithDot implements State {
 
     /**
      * 当找到运算符时应该作出的应对
+     * 此时应该在Result栏追加
+     * OperandOne 和 Operator
+     * 在Input栏中留下OperandOne
      * @param operator
      */
     @Override
     public void findOperator(char operator) {
         calculator.setOperandTwoWithOperandOne();
+        calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
         calculator.appendOperator(operator);
-        calculator.setCurrentState(calculator.getDoubleOperandDoneState());
+        calculator.setCurrentState(calculator.getOperatorState());
     }
 
     /**
