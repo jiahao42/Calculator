@@ -43,9 +43,13 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void findOperator(char operator) {
-        calculator.setOperandTwoWithOperandOne();
         calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
         calculator.appendOperator(operator);
+        if (!calculator.calculate()){
+            calculator.setCurrentState(calculator.getErrorState());
+        }
+        calculator.setOperandTwoWithOperandOne();
+        calculator.clearInput();
         calculator.setCurrentState(calculator.getOperatorState());
     }
 

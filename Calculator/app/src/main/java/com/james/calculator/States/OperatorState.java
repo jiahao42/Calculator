@@ -38,6 +38,7 @@ public class OperatorState implements State {
      */
     @Override
     public void findOperator(char operator) {
+        // TODO: 2016/9/20  
         calculator.changeOperator(operator);
         calculator.clearInput();
         calculator.setCurrentState(calculator.getOperatorState());

@@ -405,8 +405,13 @@ public class Calculator extends Activity implements View.OnClickListener {
      */
     public void changeOperator(char operator) {
         Log.d("---OperatorChanged---", String.valueOf(operator));
-        // TODO: 2016/9/20 正则表达式有问题，应该匹配最后一个运算符，而不是第一个 
-        getResult().setText(getResult().getText().toString().replaceFirst("[\\+\\-\\*/]", String.valueOf(operator)));
+        //一开始想用正则来匹配最后一个运算符
+        //但是发现当式子如 1+2-3* 时 难以匹配 故放弃
+        //getResult().setText(getResult().getText().toString().replaceFirst("((([0-9]*)[\\+\\-\\*/])*)", String.valueOf(operator)));
+        //如今用最笨的方法解决
+        // TODO: 2016/9/20 待优化
+        getResult().setText(getResult().getText().toString().substring(0,getResult().getText().toString().length() - 1));
+        getResult().setText(getResult().getText().toString() + String.valueOf(operator));
     }
 
     /**

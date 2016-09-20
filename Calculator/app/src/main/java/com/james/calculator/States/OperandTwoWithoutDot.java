@@ -45,9 +45,13 @@ public class OperandTwoWithoutDot implements State {
     @Override
     public void findOperator(char operator) {
         // TODO: 2016/9/20  这里不加等号连续运算时会出现问题
-        calculator.setOperandTwoWithOperandOne();
         calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
         calculator.appendOperator(operator);
+        if (!calculator.calculate()){
+            calculator.setCurrentState(calculator.getErrorState());
+        }
+        calculator.setOperandTwoWithOperandOne();
+        calculator.clearInput();
         calculator.setCurrentState(calculator.getOperatorState());
     }
 
