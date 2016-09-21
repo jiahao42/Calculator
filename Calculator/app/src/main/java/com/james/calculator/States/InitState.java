@@ -24,6 +24,7 @@ public class InitState implements State {
      */
     @Override
     public void findDigit() {
+        calculator.setOperandOne();
         calculator.setCurrentState(calculator.getOperandOneWithoutDot());
     }
 
