@@ -50,9 +50,10 @@ public class OperandTwoWithDot implements State {
             calculator.setOperandTwoWithOperandOne();
             calculator.clearInput();
             calculator.setCurrentState(calculator.getOperatorState());
+        }else {
+            calculator.showError();
+            calculator.setCurrentState(calculator.getErrorState());
         }
-        calculator.showError();
-        calculator.setCurrentState(calculator.getErrorState());
     }
 
     /**
@@ -60,6 +61,7 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void onCEPressed() {
+        calculator.clearInput();
         calculator.setCurrentState(calculator.getEmptyOperandTwoState());
     }
 

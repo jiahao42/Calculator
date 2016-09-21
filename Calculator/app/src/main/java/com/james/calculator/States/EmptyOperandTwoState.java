@@ -44,6 +44,7 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void onCEPressed() {
+        calculator.clearInput();
         calculator.setCurrentState(calculator.getEmptyOperandTwoState());
     }
 
@@ -58,10 +59,15 @@ public class EmptyOperandTwoState implements State {
 
     /**
      * 当按下等号时作出的应对
+     * 此时操作数2为空
+     * 按下等号则直接将操作数2的值赋给操作数1
+     * 然后不停 OP1 OP OP2
      */
     @Override
     public void onEqualPressed() {
+        calculator.setOperandTwoWithOperandOne();
         if (calculator.calculate(calculator.getOperator())){
+            calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
             calculator.showUltimateResult();
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
         }else{

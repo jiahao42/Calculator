@@ -3,7 +3,7 @@ package com.james.calculator.States;
 import com.james.calculator.Calculator;
 
 /**
- * 对应图中状态11
+ * 对应图中状态11 (暂未投入使用)
  */
 public class DoubleOperandDoneState implements State {
     Calculator calculator;

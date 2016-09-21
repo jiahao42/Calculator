@@ -74,6 +74,9 @@ public class OperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
+        //为什么需要再设置一次二者相等？
+        //因为中途可能输入了OP2，但是CE了，所以这里要重置
+        calculator.setOperandTwoWithOperandOne();
         if (calculator.calculate(calculator.getOperator())){
             calculator.clearResult();
             calculator.clearInput();
