@@ -51,6 +51,7 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void onCEPressed() {
+        calculator.resetAll();
         calculator.setCurrentState(calculator.getInitState());
     }
 
@@ -68,6 +69,9 @@ public class OperandOneWithoutDot implements State {
      */
     @Override
     public void onEqualPressed() {
+        if (calculator.getResult().getText().toString().equals("")){
+            calculator.appendOperand(String.valueOf(calculator.getOperandOne()));
+        }
         calculator.setCurrentState(calculator.getOperandOneWithoutDot());
     }
 

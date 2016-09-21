@@ -61,7 +61,7 @@ public class EmptyOperandTwoState implements State {
      */
     @Override
     public void onEqualPressed() {
-        if (calculator.calculate()){
+        if (calculator.calculate(calculator.getOperator())){
             calculator.showUltimateResult();
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
         }else{

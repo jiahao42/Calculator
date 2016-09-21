@@ -43,14 +43,16 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void findOperator(char operator) {
-        calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
-        calculator.appendOperator(operator);
-        if (!calculator.calculate()){
-            calculator.setCurrentState(calculator.getErrorState());
+        calculator.clearResult();
+        if (calculator.calculate(calculator.getOperatorBefore())){
+            calculator.appendOperand(String.valueOf(calculator.getOperandOne()));
+            calculator.appendOperator(operator);
+            calculator.setOperandTwoWithOperandOne();
+            calculator.clearInput();
+            calculator.setCurrentState(calculator.getOperatorState());
         }
-        calculator.setOperandTwoWithOperandOne();
-        calculator.clearInput();
-        calculator.setCurrentState(calculator.getOperatorState());
+        calculator.showError();
+        calculator.setCurrentState(calculator.getErrorState());
     }
 
     /**
@@ -75,7 +77,7 @@ public class OperandTwoWithDot implements State {
      */
     @Override
     public void onEqualPressed() {
-        if (calculator.calculate()){
+        if (calculator.calculate(calculator.getOperator())){
             calculator.appendOperand(String.valueOf(calculator.getOperandTwo()));
             calculator.showUltimateResult();
             calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());

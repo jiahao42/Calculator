@@ -22,6 +22,29 @@ import com.james.calculator.States.SingleOperandDoneWithSelfState;
 import com.james.calculator.States.SingleOperandState;
 import com.james.calculator.States.State;
 
+/**
+ *
+ *  ---------------------------------测试用例-----------------------------------------
+ *
+ *
+ *
+ * 
+ * 1.   123 + 456 =         正常两步计算
+ * 2.   12 + =========  无操作数2时多次按下等号的默认操作
+ * 3.   12 -+* 3 =           更改运算符
+ * 4.   12 -+* =               更改运算符。且无操作数2时的默认操作
+ * 5.   12 + 34 - 45 * 3 ========       多步计算，多次按下等号的默认操作
+ * 6.   12 + 34 ++++        多次输入相同操作符的操作
+ * 7.   127 / 0 =             查看除数为0时的错误处理
+ * 8.   127 / 0 +             查看除数为0时的错误处理
+ * 9.   36 =========    查看直接输入数字按下等号的情况
+ * 10.  12 + 34 = + 56   当一次运算完成后又将结果作为操作数
+ * 11.  +*-/=                  在初始状态下直接输入各种运算符
+ *
+ *
+ *
+ *  ---------------------------------测试用例-----------------------------------------
+ */
 
 public class Calculator extends Activity implements View.OnClickListener {
 
@@ -69,6 +92,7 @@ public class Calculator extends Activity implements View.OnClickListener {
     private float operandTwo = 0f;
     //private float resultValue = 0f;
     private char operator;
+    private char operatorBefore;
 
 
     @Override
@@ -371,6 +395,7 @@ public class Calculator extends Activity implements View.OnClickListener {
 
     /**
      * 设置当前运算符
+     * 并保存之前的运算符
      *
      * @param operator
      */
@@ -380,10 +405,41 @@ public class Calculator extends Activity implements View.OnClickListener {
     }
 
     /**
+     * 注意 该函数不能与setOperator合为一个函数
+     * 因为适用场景并不相同
+     * 比如当用户想修改当前运算符时，例：1 -  --> 1 *
+     * 如果两个函数合在一起
+     * 那么operatorBefore会被赋予错误的值
+     */
+    public void setOperatorBefore(){
+        this.operatorBefore = this.operator;
+    }
+
+    /**
+     * 返回当前的运算符
+     *
+     * @return
+     */
+    public char getOperator() {
+        return this.operator;
+    }
+
+    /**
+     * 返回前一个运算符
+     *
+     * @return
+     */
+    public char getOperatorBefore() {
+        return this.operatorBefore;
+    }
+
+    /**
      * 向Result框中追加数字
+     *
      * @param operand
      */
-    public void appendOperand(String operand){
+    public void appendOperand(String operand) {
+        Log.d("---AppendingOperand---", operand);
         getResult().setText(getResult().getText().toString() + operand);
     }
 
@@ -393,7 +449,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * @param operator
      */
     public void appendOperator(char operator) {
-        Log.d("---OperatorChanged---", String.valueOf(operator));
+        Log.d("---AppendingOperator---", String.valueOf(operator));
         getResult().setText(getResult().getText().toString() + String.valueOf(operator));
     }
 
@@ -410,7 +466,7 @@ public class Calculator extends Activity implements View.OnClickListener {
         //getResult().setText(getResult().getText().toString().replaceFirst("((([0-9]*)[\\+\\-\\*/])*)", String.valueOf(operator)));
         //如今用最笨的方法解决
         // TODO: 2016/9/20 待优化
-        getResult().setText(getResult().getText().toString().substring(0,getResult().getText().toString().length() - 1));
+        getResult().setText(getResult().getText().toString().substring(0, getResult().getText().toString().length() - 1));
         getResult().setText(getResult().getText().toString() + String.valueOf(operator));
     }
 
@@ -474,18 +530,19 @@ public class Calculator extends Activity implements View.OnClickListener {
      */
     public void setOperandTwoWithOperandOne() {
         operandTwo = operandOne;
-        Log.d("OperandTwo", String.valueOf(operandTwo));
+        Log.d("settingTwoWithOne", String.valueOf(operandTwo));
     }
 
     /**
      * 计算结果
      *
      * @return 除数为0则返回false，其余返回true
+     * @param operator
      */
-    public boolean calculate() {
-        Log.d("operandOne", String.valueOf(operandOne));
-        Log.d("operandTwo", String.valueOf(operandTwo));
-        Log.d("Operator",String.valueOf(operator));
+    public boolean calculate(char operator) {
+        Log.d("Calculate -- operandOne", String.valueOf(operandOne));
+        Log.d("Calculate -- operandTwo", String.valueOf(operandTwo));
+        Log.d("Calculate -- Operator", String.valueOf(this.operator));
         switch (operator)
         {
             case '+':
@@ -507,6 +564,7 @@ public class Calculator extends Activity implements View.OnClickListener {
             default:
                 break;
         }
+        Log.d("--CalculateResult---",String.valueOf(getOperandOne()));
         return true;
     }
 
@@ -537,7 +595,7 @@ public class Calculator extends Activity implements View.OnClickListener {
     /**
      *
      */
-    public void showUltimateResultInInput(){
+    public void showUltimateResultInInput() {
         getInput().setText(getInput().getText().append(String.valueOf(operandOne)));
     }
 

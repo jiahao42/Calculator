@@ -17,6 +17,7 @@ public class SingleOperandDoneWithSelfState implements State {
      */
     @Override
     public void findDot() {
+        calculator.resetAll();
         calculator.setCurrentState(calculator.getSingleOperandDoneWithSelfState());
     }
 
@@ -25,6 +26,7 @@ public class SingleOperandDoneWithSelfState implements State {
      */
     @Override
     public void findDigit() {
+        calculator.resetAll();
         calculator.setCurrentState(calculator.getInitState());
     }
 
@@ -47,6 +49,7 @@ public class SingleOperandDoneWithSelfState implements State {
      */
     @Override
     public void onCEPressed() {
+        calculator.resetAll();
         calculator.setCurrentState(calculator.getInitState());
     }
 
@@ -64,7 +67,7 @@ public class SingleOperandDoneWithSelfState implements State {
      */
     @Override
     public void onEqualPressed() {
-        if (calculator.calculate()){
+        if (calculator.calculate(calculator.getOperator())){
             calculator.clearResult();
             // TODO: 2016/9/19 今夜做到这里
             calculator.clearInput();

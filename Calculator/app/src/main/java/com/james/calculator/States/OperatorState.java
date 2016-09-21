@@ -29,6 +29,7 @@ public class OperatorState implements State {
     @Override
     public void findDigit() {
         calculator.setOperandTwo();
+        calculator.setOperatorBefore();//注意 如果用户随意修改运算符时，这里要记下用户的最终运算符
         calculator.setCurrentState(calculator.getOperandTwoWithoutDot());
     }
 
@@ -73,7 +74,7 @@ public class OperatorState implements State {
      */
     @Override
     public void onEqualPressed() {
-        if (calculator.calculate()){
+        if (calculator.calculate(calculator.getOperator())){
             calculator.clearResult();
             calculator.clearInput();
             calculator.showUltimateResultInInput();
