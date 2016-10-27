@@ -28,6 +28,8 @@ public class OperatorState implements State {
      */
     @Override
     public void findDigit() {
+        //calculator.clearInput();
+        // TODO: 2016/10/27 bug1： 按键顺序 ：1+2==3
         calculator.setOperandTwo();
         calculator.setOperatorBefore();//注意 如果用户随意修改运算符时，这里要记下用户的最终运算符
         calculator.setCurrentState(calculator.getOperandTwoWithoutDot());

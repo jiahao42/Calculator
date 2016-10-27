@@ -8,4 +8,10 @@ Practice about Principles of Compiler.
 * Head First Design Pattern
 * The picture below:
 
-![](https://github.com/Jameeeees/Calculator/blob/master/images/theory.png)
+![](http://7xread.com1.z0.glb.clouddn.com/5baa6762-f248-4b5e-bf29-ab448810d070)
+
+
+![](http://7xread.com1.z0.glb.clouddn.com/7fa03ff6-1d52-4a6d-aae4-4f12bb73221b)
+
+
+![](http://7xread.com1.z0.glb.clouddn.com/0f20ba58-2015-425f-9336-edf803fb3cf7)

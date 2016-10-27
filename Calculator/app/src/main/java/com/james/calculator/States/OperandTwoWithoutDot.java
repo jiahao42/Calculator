@@ -18,6 +18,7 @@ public class OperandTwoWithoutDot implements State {
 
     /**
      * 当找到小数点时应当作出的应对
+     * 跳到OperandTwoWithDot
      */
     @Override
     public void findDot() {
@@ -38,8 +39,9 @@ public class OperandTwoWithoutDot implements State {
     /**
      * 当找到运算符时应该作出的应对
      * 此时应该在Result栏追加
-     * OperandOne 和 Operator
-     * 在Input栏中留下OperandOne
+     * 计算完成后的OperandOne 和 新的Operator
+     * 并要使OP2 = OP1 防止用户不输入下一个操作数直接按等于号
+     * 清空Input栏
      * @param operator
      */
     @Override
@@ -59,6 +61,8 @@ public class OperandTwoWithoutDot implements State {
 
     /**
      * 当按下等号时作出的应对
+     * 在Result中补充OperandTwo
+     * 并且显示最终结果
      */
     @Override
     public void onEqualPressed() {

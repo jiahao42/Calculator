@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.james.calculator.States.DoubleOperandDoneState;
 import com.james.calculator.States.EmptyOperandTwoState;
 import com.james.calculator.States.ErrorState;
 import com.james.calculator.States.InitState;
@@ -19,7 +18,6 @@ import com.james.calculator.States.OperandTwoWithoutDot;
 import com.james.calculator.States.OperatorState;
 import com.james.calculator.States.ReplaceableOperatorState;
 import com.james.calculator.States.SingleOperandDoneWithSelfState;
-import com.james.calculator.States.SingleOperandState;
 import com.james.calculator.States.State;
 
 /**
@@ -69,19 +67,17 @@ public class Calculator extends Activity implements View.OnClickListener {
     private Button div;
     private Button equal;
 
-    private State errorState;
+    private State currentState;
     private State initState;
+    private State errorState;
     private State operandOneWithDot;
     private State operandOneWithoutDot;
     private State operandTwoWithDot;
     private State operandTwoWithoutDot;
     private State operatorState;
     private State replaceableOperatorState;
-    private State doubleOperandDoneState;
     private State emptyOperandTwoState;
     private State singleOperandDoneWithSelfState;
-    private State singleOperandSate;
-    private State currentState;
 
 
     private MyDigitListener myDigitListener;
@@ -171,6 +167,7 @@ public class Calculator extends Activity implements View.OnClickListener {
      * 初始化所有状态
      */
     public Calculator() {
+        this.currentState = this.initState;
         this.errorState = new ErrorState(this);
         this.initState = new InitState(this);
         this.operandOneWithDot = new OperandOneWithDot(this);
@@ -179,11 +176,8 @@ public class Calculator extends Activity implements View.OnClickListener {
         this.operandTwoWithoutDot = new OperandTwoWithoutDot(this);
         this.operatorState = new OperatorState(this);
         this.replaceableOperatorState = new ReplaceableOperatorState(this);
-        this.doubleOperandDoneState = new DoubleOperandDoneState(this);
         this.emptyOperandTwoState = new EmptyOperandTwoState(this);
         this.singleOperandDoneWithSelfState = new SingleOperandDoneWithSelfState(this);
-        this.singleOperandSate = new SingleOperandState(this);
-        this.currentState = this.initState;
     }
 
 
@@ -316,9 +310,11 @@ public class Calculator extends Activity implements View.OnClickListener {
      *
      * @return
      */
+    /*
     public State getDoubleOperandDoneState() {
         return doubleOperandDoneState;
     }
+     */
 
     /**
      * 获取EmptyOperandTwoState的实例
@@ -343,9 +339,11 @@ public class Calculator extends Activity implements View.OnClickListener {
      *
      * @return
      */
+    /*
     public State getSingleOperandState() {
         return singleOperandSate;
     }
+    */
 
     /**
      * 获取当前状态的实例
@@ -467,8 +465,13 @@ public class Calculator extends Activity implements View.OnClickListener {
         //getResult().setText(getResult().getText().toString().replaceFirst("((([0-9]*)[\\+\\-\\*/])*)", String.valueOf(operator)));
         //如今用最笨的方法解决
         // TODO: 2016/9/20 待优化
-        getResult().setText(getResult().getText().toString().substring(0, getResult().getText().toString().length() - 1));
-        getResult().setText(getResult().getText().toString() + String.valueOf(operator));
+        try{
+            getResult().setText(getResult().getText().toString().substring(0, getResult().getText().toString().length() - 1));
+            getResult().setText(getResult().getText().toString() + String.valueOf(operator));
+        }catch (StringIndexOutOfBoundsException e){
+            getResult().setText(String.valueOf(getOperandOne()) + String.valueOf(operator));
+        }
+
     }
 
     /**

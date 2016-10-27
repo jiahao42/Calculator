@@ -15,6 +15,7 @@ public class OperandOneWithDot implements State {
 
     /**
      * 当找到小数点时应当作出的应对
+     * 此时两个小数点，直接报错
      */
     @Override
     public void findDot() {
@@ -33,6 +34,8 @@ public class OperandOneWithDot implements State {
 
     /**
      * 当找到运算符时应该作出的应对
+     * 先将OP2 = OP1
+     * 并设置OP
      * @param operator
      */
     @Override
@@ -66,6 +69,7 @@ public class OperandOneWithDot implements State {
     /**
      * 当按下等号时作出的应对
      * 应该维持在此状态
+     * 若Result栏不为空则显示当前输入的数字
      */
     @Override
     public void onEqualPressed() {
