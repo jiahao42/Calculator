@@ -13,11 +13,11 @@ Practice about Principles of Compiler.
 ![](http://7xread.com1.z0.glb.clouddn.com/5baa6762-f248-4b5e-bf29-ab448810d070)
 
 ---
-### How the State and Calculator interacts
+### ---How the State and Calculator interacts---
 
 ![](http://7xread.com1.z0.glb.clouddn.com/7fa03ff6-1d52-4a6d-aae4-4f12bb73221b)
 
 ---
-### Interface and implements
+### ---Interface and implements---
 
 ![](http://7xread.com1.z0.glb.clouddn.com/0f20ba58-2015-425f-9336-edf803fb3cf7)
